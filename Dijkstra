@@ -1,0 +1,41 @@
+Given a list of edges and weights find shortest path form source to destination
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve()
+{
+	int n,m,src,dst;
+	cin>>n>>m>>src>>dst;
+	vector<vector<vector<int>>>edge(n);
+	for(int i=0;i<m;i++)
+	{
+		int u,v,wt;
+		cin>>u>>v>>wt;
+		edge[u].push_back({wt,x});
+	}
+	vector<int>dis(n,INT_MAX);
+	priority_queue<vector<int>,vector<vector<int>>,greater<vector<int>>q;
+	q.push({0,src});
+	dis[src]=0;
+	while(!q.empty())
+	{
+		auto cur=q.top();
+		q.pop();
+		for(auto x:edge[cur])
+		{
+			if(cur[0] + x[0] < dis[x[1]])
+			{
+				dis[x[1]] = cur[0] + x[0];
+				q.push({dis[x[1]], x[1]});
+			}
+		}
+	}
+	cout<<dis[dst]==INT_MAX?-1:dis[dst];
+}
+int main()
+{
+	int t;
+	while(t--)
+		solve();
+}
