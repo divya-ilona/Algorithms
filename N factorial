@@ -1,8 +1,22 @@
 Q- given number n and r calculate nCr
 
 #include <bits/stdc++.h>
-using namespace std:
+using namespace std;
 
+long long MOD=1e9+7;
+// Function to compute modular inverse using Fermat's Little Theorem
+long long modInverse(long long a) {
+    long long ans = 1;
+    long long exponent = MOD - 2; // a^(MOD-2) % MOD
+    while (exponent > 0) {
+        if (exponent % 2 == 1) {
+            ans = (ans * a) % MOD;
+        }
+        a = (a * a) % MOD;
+        exponent /= 2;
+    }
+    return ans;
+}
 void solve ()
 {
 	int n,r;
@@ -12,7 +26,9 @@ void solve ()
 	for(long long i=0;i<n-r;i++)
 	{
 		ans*=(n-i);
-		ans/=(i+1);
+		ans%=MOD;
+		ans*=modInverse(i+1);
+		ans*=MOD;
 	}
 }
 int main() 
