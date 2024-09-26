@@ -1,0 +1,23 @@
+Q- given number n and r calculate nCr
+
+#include <bits/stdc++.h>
+using namespace std:
+
+void solve ()
+{
+	int n,r;
+	cin>>n>>r;
+	r=min(r,n-r);
+	long long ans=1;
+	for(long long i=0;i<n-r;i++)
+	{
+		ans*=(n-i);
+		ans/=(i+1);
+	}
+}
+int main() 
+{
+	int t;
+	while(t--)
+		solve();
+}
